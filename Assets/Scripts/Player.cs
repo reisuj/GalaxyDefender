@@ -25,8 +25,7 @@ public class Player : MonoBehaviour
         PlayerMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
-        {
-            
+        {            
             FireLaser();
         }
     }
@@ -56,6 +55,7 @@ public class Player : MonoBehaviour
     private void FireLaser()
     {
         _nextFire = Time.time + _fireRate;
-        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        GameObject playerLaser = Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        playerLaser.tag = "PlayerLaser";
     }
 }
