@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private float _speed = 5.0f;    
     [SerializeField]
     private int _lives = 3;
+    [SerializeField]
+    private GameObject _spawnManager;
 
 
     // Start is called before the first frame update
@@ -48,9 +50,12 @@ public class Player : MonoBehaviour
     {
         _lives--;
         if (_lives == 0)
-        {
+        {            
+            if (_spawnManager != null)
+            {
+                _spawnManager.GetComponent<SpawnManager>().PlayerIsDead();
+            }
             Destroy(this.gameObject);
         }
     }
-
 }
