@@ -26,7 +26,7 @@ public class PlayerWeapons : MonoBehaviour
     private void FireLaser()
     {
         _nextFire = Time.time + _fireRate;
-        GameObject playerLaser = Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        GameObject playerLaser = Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.25f, 0), Quaternion.identity);
         playerLaser.tag = "PlayerLaser";
     }
 }
