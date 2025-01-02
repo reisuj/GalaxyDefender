@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
     [SerializeField]
-    private GameObject _spawnManager;
+    private SpawnManager _spawnManager;
+    private float _horizontalInput;
+    private float _verticalInput;
 
 
     // Start is called before the first frame update
@@ -25,12 +27,12 @@ public class Player : MonoBehaviour
     }
 
     void PlayerMovement() 
-    {   
-        float horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * _speed);
-        
-        float verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.up * verticalInput * Time.deltaTime * _speed);
+    {
+        _horizontalInput = Input.GetAxis("Horizontal");
+        _verticalInput = Input.GetAxis("Vertical");
+
+        Vector3 direction = new Vector3(_horizontalInput, _verticalInput, 0).normalized;
+        transform.Translate(direction * Time.deltaTime * _speed);
 
         //Constrain the player's movement on the y-axis
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -4, 1), 0);

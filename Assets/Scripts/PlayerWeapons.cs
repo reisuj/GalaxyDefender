@@ -7,16 +7,14 @@ public class PlayerWeapons : MonoBehaviour
     [SerializeField]
     private GameObject _tripleShotPrefab;
     [SerializeField]
+    private GameObject _playerLaser;
+    [SerializeField]
     private float _fireRate = 0.25f;
     private float _nextFire = 0.0f;
     [SerializeField]
-    private bool _tripleShotActive = false;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private bool _isTripleShotActive = false;
+    [SerializeField]
+    private float _laserOffset = 1.25f;
 
     // Update is called once per frame
     void Update()
@@ -24,7 +22,7 @@ public class PlayerWeapons : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)
         {
             _nextFire = Time.time + _fireRate;
-            if (_tripleShotActive)
+            if (_isTripleShotActive)
             {
                 FireTripleShot();
             }
@@ -32,18 +30,17 @@ public class PlayerWeapons : MonoBehaviour
             {
                 FireLaser();
             }
+            _playerLaser.tag = "PlayerLaser";
         }
     }
 
     private void FireLaser()
     {        
-        GameObject playerLaser = Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.25f, 0), Quaternion.identity);
-        playerLaser.tag = "PlayerLaser";
+        _playerLaser = Instantiate(_laserPrefab, transform.position + new Vector3(0, _laserOffset, 0), Quaternion.identity);
     }
 
     private void FireTripleShot()
     {        
-        GameObject playerLaser = Instantiate(_tripleShotPrefab, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
-        playerLaser.tag = "PlayerLaser";
+        _playerLaser = Instantiate(_tripleShotPrefab, transform.position + new Vector3(0, 0, 0), Quaternion.identity);
     }
 }

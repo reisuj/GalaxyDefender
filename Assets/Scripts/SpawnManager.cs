@@ -4,9 +4,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
-    private bool _playerisAlive = true;
-    [SerializeField]
-    GameObject _player;
+    private bool _playerisAlive = true;    
     [SerializeField]
     private GameObject _enemyPrefab;
     [SerializeField]
@@ -15,12 +13,6 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnRoutine());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator SpawnRoutine()
